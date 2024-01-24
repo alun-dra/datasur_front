@@ -4,7 +4,7 @@ const API_URL = 'https://daback.onrender.com/api/Empre/empre';
 
 export const upEmpresa = async (name, nombre, giroempresa, telefonoempresa) => {
   try {
-    const response = await axios.put(`${API_URL}/update?${name}`, {
+    const response = await axios.put(`${API_URL}/update?name=${encodeURIComponent(name)}`, {
       nombre,
       giroempresa,
       telefonoempresa

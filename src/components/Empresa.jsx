@@ -55,7 +55,7 @@ const Empresas = () => {
 
     const handleUpdateClick = (empresa) => {
         setIsUpdateModalOpen(true);
-        // Establecer el estado de updateEmpresa con los valores de la empresa seleccionada
+        
         setUpdateEmpresa({
             nombre: empresa.nombre,
             giroempresa: empresa.giroempresa,
