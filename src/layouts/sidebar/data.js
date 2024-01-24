@@ -11,8 +11,8 @@ export const subMenuRecursoHumanos = [
           nameSubMenu: "Dashboard",
           path: "/dashboard",
           submodules: [
-            { name: "Home", path: "/dashboard/panelPrincipal" },
-            { name: "Clientes", path: "/dashboard/clientes" },
+            // { name: "Home", path: "/dashboard/panelPrincipal" },
+            // { name: "Clientes", path: "/dashboard/clientes" },
             { name: "Empresas", path: "/dashboard/empresas" },
 
             
