@@ -183,7 +183,7 @@ const Empresas = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {data && data.results.map((empresa, index) => (
+                                {data && data.results.results.map((empresa, index) => (
                                     <tr key={index}>
                                     <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
                                         <p className="text-gray-900 whitespace-no-wrap">{empresa.nombre}</p>
