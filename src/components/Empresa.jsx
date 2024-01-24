@@ -65,7 +65,7 @@ const Empresas = () => {
 
     const handleConfirmUpdate = async () => {
         try {
-            if (selectedEmpresa) {
+            
                 const updateEmpresaData = await upEmpresa(
                     selectedEmpresa.nombre,
                     updateEmpresa.nombre,
@@ -75,7 +75,7 @@ const Empresas = () => {
                 setIsUpdateModalOpen(false);
                 
                 window.location.reload(); 
-            }
+            
         } catch (error) {
             console.error('Error al actualizar la empresa:', error);
         }
