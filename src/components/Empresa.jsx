@@ -73,7 +73,8 @@ const Empresas = () => {
                     updateEmpresa.telefonoempresa
                 );
                 setIsUpdateModalOpen(false);
-                window.location.reload();
+                
+                refetch(); 
             }
         } catch (error) {
             console.error('Error al actualizar la empresa:', error);
@@ -276,7 +277,7 @@ const Empresas = () => {
             {isUpdateModalOpen && (
                 <ReactModal
                     isOpen={isUpdateModalOpen}
-                    onRequestClose={() => setUpdateEmpresa(false)}
+                    onRequestClose={() => setIsUpdateModalOpen(false)}
                     style={customStyles}
                 >
                     <h2 className="text-lg font-bold mb-4">Actualizar empresa</h2>
@@ -321,8 +322,8 @@ const Empresas = () => {
                             </button>
                             <button 
                                 className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700 transition-colors" 
-                                onClick={() => setUpdateEmpresa(false)}
-                                >
+                                onClick={() => setIsUpdateModalOpen(false)}
+                            >
                                 Cancelar
                             </button>
                         </div>
