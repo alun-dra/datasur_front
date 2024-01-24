@@ -79,14 +79,9 @@ const Empresas = () => {
                 updateEmpresa.giroempresa,
                 updateEmpresa.telefonoempresa
             );
-    
-            console.log('Empresa actualizada con éxito:', updateEmpresaData); // Para depuración
-    
+            console.log('Empresa actualizada con éxito:', updateEmpresaData); 
             setIsUpdateModalOpen(false);
-
-    
-            // Si realmente necesitas recargar la página (no recomendado en SPA), descomenta la siguiente línea
-            // window.location.reload(); 
+            window.location.reload();
         } catch (error) {
             console.error('Error al actualizar la empresa:', error);
         }
