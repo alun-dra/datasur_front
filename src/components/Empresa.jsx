@@ -7,6 +7,7 @@ import deleteEmpresa from '../api/empreDelete';
 import ReactModal from 'react-modal';
 import { addEmpresa } from '../api/empreIngre';
 import { upEmpresa } from '../api/empreUpdate';
+
 const customStyles = {
     content: {
       top: '30%',
@@ -23,21 +24,18 @@ const customStyles = {
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0.75)'
     }
-  };
+};
+
 const Empresas = () => {
     const [searchTerm, setSearchTerm] = useState('');
-
     const { data, loading, error } = useFetchEmpresas(1, searchTerm); 
-
     const [isModalOpen, setIsModalOpen] = useState(false);
-
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
     const [updateEmpresa, setUpdateEmpresa] = useState({
         nombre: '',
         giroempresa: '',
         telefonoempresa: ''
     });
-
     const [selectedEmpresa, setSelectedEmpresa] = useState(null);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [newEmpresa, setNewEmpresa] = useState({
@@ -45,7 +43,6 @@ const Empresas = () => {
         giroempresa: '',
         telefonoempresa: ''
     });
-
     const handleeInputChange = (e) => {
         const { name, value } = e.target;
         setUpdateEmpresa(prev => ({
@@ -53,7 +50,6 @@ const Empresas = () => {
           [name]: value
         }));
     };
-
     const handleUpdateClick = (empresa) => {
         setSelectedEmpresa(empresa); 
         setIsUpdateModalOpen(true);
@@ -64,9 +60,8 @@ const Empresas = () => {
             telefonoempresa: empresa.telefonoempresa
         });
     };
-
     const handleConfirmUpdate = async () => {
-        console.log('Intentando actualizar la empresa:', selectedEmpresa); // Para depuración
+        console.log('Intentando actualizar la empresa:', selectedEmpresa); 
     
         if (!selectedEmpresa) {
             console.error('No se ha seleccionado ninguna empresa para actualizar.');
@@ -87,7 +82,6 @@ const Empresas = () => {
             console.error('Error al actualizar la empresa:', error);
         }
     };
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewEmpresa(prev => ({
@@ -113,7 +107,6 @@ const Empresas = () => {
           console.error('Error al agregar la empresa:', error);
         }
     }; 
-
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     };
@@ -135,30 +128,30 @@ const Empresas = () => {
     const handleDownloadExcel = () => {
         const wb = XLSX.utils.book_new();
         const ws = XLSX.utils.json_to_sheet(data.results);
-
-        const headerStyle = {
-          font: {
-            bold: true,
-            color: { rgb: "FFFFFF" }
-          },
-          fill: {
-            fgColor: { rgb: "1F4E78" }
-          },
-          alignment: {
-            horizontal: "center",
-            vertical: "center"
-          }
-        };
-
-        const range = XLSX.utils.decode_range(ws['!ref']); 
-        for(let C = range.s.c; C <= range.e.c; ++C) {
-          const address = XLSX.utils.encode_col(C) + "1"; 
-          ws[address].s = headerStyle; 
+      
+        const headerRange = XLSX.utils.decode_range(ws['!ref']); 
+        for (let C = headerRange.s.c; C <= headerRange.e.c; ++C) {
+          const cellRef = XLSX.utils.encode_col(C) + '1'; 
+          if (!ws[cellRef]) continue; 
+          ws[cellRef].s = {
+            font: {
+              bold: true,
+              color: { argb: 'FFFFFFFF' } 
+            },
+            fill: {
+              patternType: 'solid',
+              fgColor: { argb: 'FF1F4E78' } 
+            },
+            alignment: {
+              horizontal: 'center',
+              vertical: 'center'
+            }
+          };
         }
-
-        XLSX.utils.book_append_sheet(wb, ws, 'Empresas');      
+      
+        XLSX.utils.book_append_sheet(wb, ws, 'Empresas');
         XLSX.writeFile(wb, 'Empresas.xlsx');
-      };
+    };
     if (loading) return <p>Cargando...</p>;
     if (error) return <p>Ocurrió un error al obtener los datos: {error.message}</p>;
     return (
