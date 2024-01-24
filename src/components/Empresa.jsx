@@ -64,18 +64,28 @@ const Empresas = () => {
     };
 
     const handleConfirmUpdate = async () => {
+        console.log('Intentando actualizar la empresa:', selectedEmpresa); // Para depuración
+    
+        if (!selectedEmpresa) {
+            console.error('No se ha seleccionado ninguna empresa para actualizar.');
+            return;
+        }
+    
         try {
-            
-                const updateEmpresaData = await upEmpresa(
-                    selectedEmpresa.nombre,
-                    updateEmpresa.nombre,
-                    updateEmpresa.giroempresa,
-                    updateEmpresa.telefonoempresa
-                );
-                setIsUpdateModalOpen(false);
-                
-                window.location.reload(); 
-            
+            const updateEmpresaData = await upEmpresa(
+                selectedEmpresa.nombre,
+                updateEmpresa.nombre,
+                updateEmpresa.giroempresa,
+                updateEmpresa.telefonoempresa
+            );
+    
+            console.log('Empresa actualizada con éxito:', updateEmpresaData); // Para depuración
+    
+            setIsUpdateModalOpen(false);
+
+    
+            // Si realmente necesitas recargar la página (no recomendado en SPA), descomenta la siguiente línea
+            // window.location.reload(); 
         } catch (error) {
             console.error('Error al actualizar la empresa:', error);
         }
