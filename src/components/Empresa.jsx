@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import * as XLSX from 'xlsx';
 import { Outlet } from 'react-router-dom';
 import { TABLE_HEADERS_EMPRE } from '../constant/empreHeader';
 import useFetchEmpresas from "../api/empre";
@@ -131,6 +132,12 @@ const Empresas = () => {
             }
         }
     };
+    const handleDownloadExcel = () => {
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.json_to_sheet(data.results);
+        XLSX.utils.book_append_sheet(wb, ws, 'Empresas');
+        XLSX.writeFile(wb, 'Empresas.xlsx');
+      };
     if (loading) return <p>Cargando...</p>;
     if (error) return <p>Ocurrió un error al obtener los datos: {error.message}</p>;
     return (
@@ -193,13 +200,21 @@ const Empresas = () => {
                     </div>
                 </div>
                 <div className="flex justify-end p-4">
-                    <button
-                    className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700"
-                    onClick={handleAddClick}
+                <button
+                        className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700"
+                        onClick={handleAddClick}
                     >
-                    Agregar
+                        Agregar
                     </button>
+                    <button
+                        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+                        onClick={handleDownloadExcel}
+                    >
+                        Descargar Excel
+                    </button>
+
                 </div>
+                
 
             </div>
             {isModalOpen && (
