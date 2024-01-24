@@ -10,7 +10,7 @@ const useFetchEmpresas = (page, name = '') => {
     const fetchEmpresas = async () => {
       try {
         
-        let url = `http://127.0.0.1:8000/api/Empre/empre/all?page=${page}`;
+        let url = `https://daback.onrender.com/api/Empre/empre/all?page=${page}`;
         if (name) url += `&name=${name}`;
 
         const response = await axios.get(url);

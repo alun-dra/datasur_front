@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const deleteEmpresa = async (nombreEmpresa) => {
   try {
-    const response = await axios.delete(`http://127.0.0.1:8000/api/Empre/empre/delete`, {
+    const response = await axios.delete(`https://daback.onrender.com/api/Empre/empre/delete`, {
       params: {
         name: nombreEmpresa
       }
