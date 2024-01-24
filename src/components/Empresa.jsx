@@ -54,6 +54,7 @@ const Empresas = () => {
     };
 
     const handleUpdateClick = (empresa) => {
+        setSelectedEmpresa(empresa); 
         setIsUpdateModalOpen(true);
         
         setUpdateEmpresa({
@@ -179,7 +180,7 @@ const Empresas = () => {
                                     </td>
                                     <td className="border-b border-gray-200 bg-white text-sm">
                                         <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
-                                            onClick={handleUpdateClick}
+                                            onClick={() => handleUpdateClick(empresa)} // Asegúrate de pasar empresa aquí
                                         >
                                         Actualizar
                                         </button>
