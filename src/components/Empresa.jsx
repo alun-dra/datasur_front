@@ -135,7 +135,28 @@ const Empresas = () => {
     const handleDownloadExcel = () => {
         const wb = XLSX.utils.book_new();
         const ws = XLSX.utils.json_to_sheet(data.results);
-        XLSX.utils.book_append_sheet(wb, ws, 'Empresas');
+
+        const headerStyle = {
+          font: {
+            bold: true,
+            color: { rgb: "FFFFFF" }
+          },
+          fill: {
+            fgColor: { rgb: "1F4E78" }
+          },
+          alignment: {
+            horizontal: "center",
+            vertical: "center"
+          }
+        };
+
+        const range = XLSX.utils.decode_range(ws['!ref']); 
+        for(let C = range.s.c; C <= range.e.c; ++C) {
+          const address = XLSX.utils.encode_col(C) + "1"; 
+          ws[address].s = headerStyle; 
+        }
+
+        XLSX.utils.book_append_sheet(wb, ws, 'Empresas');      
         XLSX.writeFile(wb, 'Empresas.xlsx');
       };
     if (loading) return <p>Cargando...</p>;
@@ -199,20 +220,19 @@ const Empresas = () => {
                         </table>
                     </div>
                 </div>
-                <div className="flex justify-end p-4">
-                <button
-                        className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700"
+                <div className="flex justify-end p-4 space-x-2">
+                    <button
+                        className="text-white bg-green-500 hover:bg-green-600 py-2 px-4 rounded transition duration-300 ease-in-out shadow-lg focus:outline-none focus:shadow-outline"
                         onClick={handleAddClick}
                     >
                         Agregar
                     </button>
                     <button
-                        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+                        className="text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded transition duration-300 ease-in-out shadow-lg focus:outline-none focus:shadow-outline"
                         onClick={handleDownloadExcel}
                     >
                         Descargar Excel
                     </button>
-
                 </div>
                 
 
