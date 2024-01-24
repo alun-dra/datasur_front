@@ -227,8 +227,6 @@ const Empresas = () => {
                         Descargar Excel
                     </button>
                 </div>
-                
-
             </div>
             {isModalOpen && (
                 <ReactModal
