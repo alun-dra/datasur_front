@@ -74,7 +74,7 @@ const Empresas = () => {
                 );
                 setIsUpdateModalOpen(false);
                 
-                refetch(); 
+                window.location.reload(); 
             }
         } catch (error) {
             console.error('Error al actualizar la empresa:', error);
